@@ -1,0 +1,10 @@
+[{
+	"policyTemplateId": "9936",
+	"configurationData": {
+		"validate_url": "https://authserver.com:443/validate/token",
+		"client_id": "xxx",
+		"client_secret": "xxx",
+		"validation_client_id": "xxx",
+		"scope": "xxx"
+	}
+}]

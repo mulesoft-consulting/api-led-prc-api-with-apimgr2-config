@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+	<servers>
+		<server>
+			<id>mulesoft-ee-release</id>
+			<username>peter.dunworth</username>
+			<password>x</password>
+		</server>
+		<server>
+			<id>mulesoft-snapshots</id>
+			<username>peter.dunworth</username>
+			<password>x</password>
+		</server>
+		<server>
+			<id>mulesoft-private</id>
+			<username>peter.dunworth</username>
+			<password>x</password>
+		</server>
+		<server>
+			<id>internal-repo</id>
+			<username>pdunworth</username>
+			<password>y</password>
+		</server>
+	</servers>
+
+	<activeProfiles>
+		<activeProfile>global-settings</activeProfile>
+		<activeProfile>standard-repositories</activeProfile>
+	</activeProfiles>
+
+	<profiles>
+		<profile>
+			<id>global-settings</id>
+			<properties>
+				<deploy.businessGroup></deploy.businessGroup>
+				<api.businessGroup>My Business</api.businessGroup>
+				<skip.publish.artifact>true</skip.publish.artifact>
+			</properties>
+		</profile>
+		
+		<profile>
+			<id>no-environment</id>
+			<activation>
+				<property>
+					<name>env</name>
+					<value></value>
+				</property>
+			</activation>
+			<properties>
+				<deploy.app.suffix>local</deploy.app.suffix>
+				<deploy.environment>LOCAL</deploy.environment>
+				<deploy.target></deploy.target>
+				<deploy.targetType></deploy.targetType>
+			</properties>
+		</profile>
+		
+		<profile>
+			<id>np1</id>
+			<activation>
+				<property>
+					<name>env</name>
+					<value>np1</value>
+				</property>
+			</activation>
+			<properties>
+				<deploy.app.suffix></deploy.app.suffix>
+				<deploy.environment>NP1</deploy.environment>
+				<deploy.target>pdd_np1</deploy.target>
+				<deploy.targetType>server</deploy.targetType>
+			</properties>
+		</profile>
+		
+		<profile>
+			<id>np2</id>
+			<activation>
+				<property>
+					<name>env</name>
+					<value>np2</value>
+				</property>
+			</activation>
+			<properties>
+				<deploy.app.suffix></deploy.app.suffix>
+				<deploy.environment>NP2</deploy.environment>
+				<deploy.target>pdd_np2</deploy.target>
+				<deploy.targetType>server</deploy.targetType>
+			</properties>
+		</profile>
+		
+		<profile>
+			<id>np3</id>
+			<activation>
+				<property>
+					<name>env</name>
+					<value>np3</value>
+				</property>
+			</activation>
+			<properties>
+				<deploy.app.suffix></deploy.app.suffix>
+				<deploy.environment>NP3</deploy.environment>
+				<deploy.target>pdd_np3</deploy.target>
+				<deploy.targetType>cluster</deploy.targetType>
+			</properties>
+		</profile>
+		
+		<profile>
+			<id>prod</id>
+			<activation>
+				<property>
+					<name>env</name>
+					<value>prod</value>
+				</property>
+			</activation>
+			<properties>
+				<deploy.app.suffix></deploy.app.suffix>
+				<deploy.environment>PROD</deploy.environment>
+				<deploy.target>pdd_prod</deploy.target>
+				<deploy.targetType>cluster</deploy.targetType>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>standard-repositories</id>
+			<repositories>
+				<repository>
+					<id>Central</id>
+					<name>Central</name>
+					<url>http://repo1.maven.org/maven2/</url>
+					<layout>default</layout>
+				</repository>
+
+				<repository>
+					<id>mulesoft-releases</id>
+					<name>MuleSoft Releases Repository</name>
+					<url>http://repository.mulesoft.org/releases/</url>
+					<layout>default</layout>
+				</repository>
+
+				<repository>
+					<id>mulesoft-ee-release</id>
+					<url>https://repository.mulesoft.org/nexus-ee/content/repositories/releases-ee/</url>
+					<layout>default</layout>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+
+			<pluginRepositories>
+				<pluginRepository>
+					<id>mule-public</id>
+					<layout>default</layout>
+					<url>https://repository.mulesoft.org/nexus/content/repositories/releases</url>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</pluginRepository>
+				<pluginRepository>
+					<id>mulesoft-release</id>
+					<name>mulesoft release repository</name>
+					<layout>default</layout>
+					<url>https://repository.mulesoft.org/nexus/content/groups/public</url>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</pluginRepository>
+				<pluginRepository>
+					<id>mulesoft-ee-release</id>
+					<url>https://repository.mulesoft.org/nexus-ee/content/repositories/releases-ee/</url>
+					<layout>default</layout>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+	</profiles>
+
+	<pluginGroups>
+		<pluginGroup>org.mule.tools</pluginGroup>
+	</pluginGroups>
+
+</settings>

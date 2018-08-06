@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:api-platform-gw="http://www.mulesoft.org/schema/mule/api-platform-gw"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:spring="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/api-platform-gw http://www.mulesoft.org/schema/mule/api-platform-gw/current/mule-api-platform-gw.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+	<apikit:config name="api-config" raml="api.raml"
+		consoleEnabled="false" consolePath="console" doc:name="Router" />
+
+	<api-platform-gw:api apiName="${api.name}" version="${api.version}"
+		flowRef="api-main" doc:name="API Autodiscovery" />
+
+	<flow name="api-main">
+		<http:listener config-ref="router.listener" path="/${api.path.prefix}/v1/*"
+			parseRequest="false" doc:name="HTTP">
+			<http:response-builder reasonPhrase="#[message.outboundProperties['http.reason']]" />
+		</http:listener>
+
+		<set-variable variableName="client_id"
+			value="#[message.inboundProperties['client_id']]"
+			doc:name="client_id" />
+		<set-variable variableName="resource"
+			value="#[message.inboundProperties['http.request.path'].substring(message.inboundProperties['http.listener.path'].length()-2)]"
+			doc:name="resource" />
+        <set-variable variableName="mule.env" value="${mule.env}" doc:name="mule.env"/>
+
+		<apikit:router config-ref="api-config" doc:name="APIkit Router" />
+
+		<exception-strategy ref="api-apiKitGlobalExceptionMapping"
+			doc:name="Reference Exception Strategy" />
+	</flow>
+</mule>
