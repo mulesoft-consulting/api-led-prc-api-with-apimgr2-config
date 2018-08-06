@@ -1,5 +1,5 @@
 # api-led-prc-api-with-apimgr2-config
-This is a starting Mule project template for building an HTTP REST Process API in Mule. The proxy contains automated API configuration for Anypoint API Manager 2.x. 
+This is a starting Mule project template for building an HTTP REST Process API in Mule. The pom.xml contains automated API configuration for Anypoint API Manager 2.x. 
 
 The template assumes four deployment environments (NP1, NP2, NP3 and PROD). These should be changed to reflect the correct environment names.
 
