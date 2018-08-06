@@ -3,14 +3,16 @@ This is a starting Mule project template for building an HTTP REST Process API i
 
 The template assumes four deployment environments (NP1, NP2, NP3 and PROD). These should be changed to reflect the correct environment names.
 
-###API Configuration
+**API Configuration**
+
 The automated API configuration will create the API and version in Exchange if it does not already exist. No content will be created or published for the API/version.
 
 The automated API configuration registers the API into all the [NP1, NP2, NP3 and PROD] environments at the same time. In addition, the configuration property files in src/main/resources are updated to include the API registration information. 
 
 API configuration is executed with ApiConfigTool (using the exec-maven-plugin).
 
-###API Runtime Deployment
+**API Runtime Deployment**
+
 The API deployable archive can be deployed to only one deployment (Runtime) environment at a time.
 
 The deployment environment server configuration information is stored in the Maven settings.xml file. This means that a separation between developer accessible environments and devops (or CI/CD) environments can be maintained in the settings.
